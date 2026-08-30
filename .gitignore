@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# Rust
+target/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+.goodnotesmeta
+
+# Build outputs (Keil / Eclipse)
+*.o
+*.axf
+*.lst
+*.dep
+*.lnp
+*.uvguix.*
+
+# Env
+.env
+
+# Agent working files
+.pdf-cache/
+docs/

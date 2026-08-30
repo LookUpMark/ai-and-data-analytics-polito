@@ -1,0 +1,170 @@
+Presenter 1: Introduction & The Problem
+(Time: < 3 minutes)
+
+
+
+[Slide 1: Title Slide]
+
+(No speech)
+
+
+
+[Slide 2: The High-Resolution Problem]
+
+(30 seconds)
+
+"The central challenge in many fields is processing massive, high-resolution images. State-of-the-art models cannot fit these images into GPU memory. This forces a compromise: how do we process these images without losing critical, fine-grained details?"
+
+
+
+[Slide 3: Flawed Solution 1: Downsampling]
+
+(30 seconds)
+
+"The first solution is Downsampling—shrinking the image to fit. This provides full global context, but it destroys fine details. Small objects, thin lines, and sharp boundaries are lost, leading to a coarse, inaccurate map."
+
+
+
+[Slide 4: Flawed Solution 2: Patch Processing]
+
+(30 seconds)
+
+"The opposite is Patch Processing—cutting the image into small tiles. This preserves local details, but the network loses all global context. This 'local ambiguity' causes misclassifications and visible artifacts where the tiles are stitched back together."
+
+
+
+[Slide 5: The Solution: MagNet]
+
+(60 seconds)
+
+"We have a dilemma: Downsampling loses details; Patching loses context. This paper's solution, MagNet, does both.
+
+MagNet is a multi-scale framework that progressively refines a segmentation map. It starts with a coarse, global view and gradually "zooms in," adding finer details at each stage.
+
+As you can see in the comparison: (c) Downsampling misses the river. (d) Patch processing is noisy. But (h), MagNet, is both globally consistent and locally detailed, closely matching the (b) Ground Truth."
+
+Presenter 2: Methodology - How MagNet Works
+(Time: < 3 minutes)
+
+
+
+[Slide 6: MagNet: Core Pipeline]
+
+(45 seconds)
+
+"MagNet is a multi-stage, coarse-to-fine pipeline. The process starts at a coarse level, s-1. Its output, Y(s-1), is then fed as an input to the next, higher-resolution stage, Level s. This stage processes a high-resolution image, X(s), and uses the old map to refine it. This propagation continues, progressively sharpening the segmentation. Crucially, the same network is reused at every stage, making the model efficient."
+
+
+
+[Slide 7: The Refinement Module]
+
+(45 seconds)
+
+"The core of the framework is the 'Refinement Module.' Its job is to intelligently merge two maps at each stage:
+
+'Y': The stable segmentation map from all previous, coarser stages.
+'O': The brand new, detailed prediction from the current, finer scale.
+It combines these into a new map 'R', and then decides which pixels from 'R' are good enough to replace the old pixels from 'Y'."
+
+
+[Slide 8: The Refinement Module: Internal Structure]
+
+(15 seconds)
+
+"Internally, the module is very simple and lightweight, composed mainly of two residual blocks. It's a simple, repeatable structure."
+
+
+
+[Slide 9: The Selection Logic: The 'Secret Sauce']
+
+(60 seconds)
+
+"How does it decide which pixels to replace? This is the key. It doesn't replace everything. It intelligently selects only the most uncertain pixels.
+
+It calculates a selection score, 'Q', for every pixel. This score is high if:
+
+The old map, Y, is uncertain.
+And the new combined map, R, is certain.
+It then selects the 'top-k' pixels with the highest Q-score and replaces only those locations. This ensures stable, coarse predictions are kept, while only uncertain, low-quality areas are refined."
+
+Presenter 3: Experiments & Key Results
+(Time: < 3 minutes)
+
+
+
+[Slide 10: Key Result: Intermediate Scales are Essential]
+
+(30 seconds)
+
+"The first finding: progressive refinement is essential. This table shows that jumping directly from a coarse scale (256) to a fine scale (2048) gives minimal improvement. However, using the intermediate scales—256, 512, 1024, then 2048—gives a 2-point mIoU jump, proving the gradual approach is key."
+
+
+
+[Slide 11: Visualizing the Progression]
+
+(20 seconds)
+
+"We can see this refinement in action. As the model moves from coarse to fine, the segmentation of the person becomes more precise, and the error (in white) progressively disappears."
+
+
+
+[Slide 12: MagNet-Fast: The Practical Solution]
+
+(30 seconds)
+
+"The full MagNet is accurate but slow. The authors propose MagNet-Fast, which processes fewer scales and only the 3 most uncertain patches at each stage. This results in a 9-times speedup, making it faster than the previous state-of-the-art, while still beating its accuracy."
+
+
+
+[Slide 13: Results: Cityscapes (Urban Scenes)]
+
+(30 seconds)
+
+"On the Cityscapes dataset, MagNet-Fast at 66.91 mIoU beats all previous methods. The full MagNet sets a new state-of-the-art at 67.57, clearly demonstrating the superiority of this progressive approach."
+
+
+
+[Slide 14: Ablation: Point Selection]
+
+(30 seconds)
+
+"Finally, MagNet's selection logic is more stable than PointRend's. This chart shows that as MagNet (red) refines more points, its accuracy steadily increases and plateaus. PointRend (blue) becomes unstable and its accuracy actually drops if it refines too many points."
+
+Presenter 4: Generalizability & Conclusion
+(Time: < 3 minutes)
+
+
+
+[Slide 15: Ablation: Model Selection]
+
+(20 seconds)
+
+"MagNet is model-agnostic. It’s a framework, not a backbone. As shown here, whether using DeepLabV3+ or HRNet, MagNet consistently and significantly improves the mIoU of the underlying model."
+
+
+
+[Slide 16: Results: DeepGlobe (Aerial Scenes)]
+
+(30 seconds)
+
+"The framework also generalizes beyond urban scenes. On the DeepGlobe satellite dataset, the baseline FPN gets 67.86 mIoU. MagNet pushes this to a new state-of-the-art of 72.96, proving its effectiveness on aerial imagery."
+
+
+
+[Slide 17: Results: Gleason (Medical Dataset)]
+
+(30 seconds)
+
+"It was also tested on the Gleason medical dataset, using ultra-high-resolution $5000 \times 5000$ pixel images. Here, MagNet improved the already strong baseline and even surpassed the 65.48 mIoU score of human 'Experts,' which is a very impressive result."
+
+
+
+[Slide 18: Conclusion]
+
+(60 seconds)
+
+"In conclusion, MagNet is a robust framework for high-resolution segmentation. It solves the core problem by progressively refining a coarse global map with fine local details, setting a new state-of-the-art on three diverse, large-scale datasets.
+
+The main limitation is the accuracy-speed trade-off, which is why the practical 'MagNet-Fast' version is so important.
+
+The key take-home message is this: for high-resolution images, we don't have to choose between global context and local detail. A progressive, coarse-to-fine refinement strategy is a highly effective method to bridge that gap."
