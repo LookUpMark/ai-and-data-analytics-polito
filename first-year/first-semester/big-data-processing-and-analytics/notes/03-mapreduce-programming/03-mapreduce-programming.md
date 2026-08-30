@@ -18,7 +18,7 @@ Between map and reduce, the framework performs the **shuffle**: all pairs with t
 
 ## Reference Implementation: Word Count (Lab 1 + slide 04)
 
-From `labs/lab-1/mapreducebasicprojectwindows/src/main/java/it/polito/bigdata/hadoop/` — identical in structure to the slide-04 word count.
+From `labs/lab-01/map-reduce-basic-project-windows/src/main/java/it/polito/bigdata/hadoop/` — identical in structure to the slide-04 word count.
 
 ### Mapper
 
@@ -322,7 +322,7 @@ Lab 2 ex.2 (redone in Spark in Lab 5 task 3): given `word\tfreq`, count how many
 
 Input: one line per reviewer, `reviewerId,product1,product2,…`. Goal: top-100 product pairs reviewed together.
 
-**Job 1 — generate and count pairs.** The filled skeleton (`labs/lab-3/lab3windows-skeleton/.../mapperbigdata1.java`) emits each unordered pair once, sorted inside the pair so that `(p1,p2)` and `(p2,p1)` collapse to the same key:
+**Job 1 — generate and count pairs.** The filled skeleton (`labs/lab-03/lab-03-windows-skeleton/.../mapperbigdata1.java`) emits each unordered pair once, sorted inside the pair so that `(p1,p2)` and `(p2,p1)` collapse to the same key:
 
 ```java
 String[] fields = value.toString().split(",");
@@ -394,7 +394,7 @@ The handout's toy example shows why: product B5 has a bad raw average but, after
 
 ## Pattern: Combiner (Lab solutions "withcombiner")
 
-The Hadoop exercise set ships "withcombiner" variants (e.g. `exercises/hadoop/solutionsexmapreduce/exercise5withcombiner/`): a combiner is set in the driver with one extra line, between mapper and reducer:
+The Hadoop exercise set ships "withcombiner" variants (e.g. `exercises/hadoop/solutions-map-reduce/exercise5withcombiner/`): a combiner is set in the driver with one extra line, between mapper and reducer:
 
 ```java
 job.setMapperClass(MapperBigData.class);

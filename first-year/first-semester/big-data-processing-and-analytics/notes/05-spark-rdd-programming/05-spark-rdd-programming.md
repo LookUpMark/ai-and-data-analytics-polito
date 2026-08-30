@@ -408,7 +408,7 @@ rdd.distinct()                                   # Lab 6: distinct (user, produc
 
 ## Lab 5 in Full: Filter + Statistics on Word Frequencies
 
-From `labs/lab-5/main.ipynb` (input: `word\tfreq` lines):
+From `labs/lab-05/main.ipynb` (input: `word\tfreq` lines):
 
 ```python
 inputRDD = sc.textFile("SampleLocalFile.csv")
@@ -454,7 +454,7 @@ finalRDD = groupedRDD.reduceByKey(lambda x, y: x + y)
 
 ## Lab 6 in Full: Product Pairs Reviewed Together
 
-From `labs/lab-6/main.ipynb` (one job: transpose → pair frequencies → sorted output):
+From `labs/lab-06/main.ipynb` (one job: transpose → pair frequencies → sorted output):
 
 ```python
 # 0. read and remove the header
@@ -489,11 +489,11 @@ orderedByValueRDD = orderedByValueRDD.coalesce(2)
 orderedByValueRDD.saveAsTextFile("output")
 ```
 
-The stored output folder contains files like `part-00000` with lines `('B1,B3', 3)` — verified in `labs/lab-6/output/`.
+The stored output folder contains files like `part-00000` with lines `('B1,B3', 3)` — verified in `labs/lab-06/output/`.
 
 ## Lab 7 (RDD part): Criticality per (station, timeslot)
 
-From `labs/lab-7/main.ipynb` (RDD solution block):
+From `labs/lab-07/main.ipynb` (RDD solution block):
 
 ```python
 registerRDD = sc.textFile("sampleData/registerSample.csv").filter(lambda x: "station" not in x)

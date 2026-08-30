@@ -21,7 +21,7 @@ program at Politecnico di Torino (a.y. 2024/25 – 2025/26). Two academic years,
 └── second-year/
     ├── first-semester/
     │   ├── advanced-machine-learning/                  # labs, notes, paper, project, slides
-    │   ├── deep-natural-language-processing/           # exam-simulations, labs, notes, project, slides
+    │   ├── deep-natural-language-processing/           # exam/simulations, labs, notes, project, slides
     │   ├── large-language-models/                      # exam, labs, notes, project, slides
     │   └── robot-learning/                             # journals, labs, notes, project, slides
     └── second-semester/

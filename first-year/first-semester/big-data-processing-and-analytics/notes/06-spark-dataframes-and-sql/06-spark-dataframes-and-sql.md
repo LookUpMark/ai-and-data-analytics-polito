@@ -49,7 +49,7 @@ spark = SparkSession.builder.getOrCreate()
 
 ## Reading Structured Data
 
-From `labs/lab-8/lab-08.ipynb` (tab-separated CSVs with header):
+From `labs/lab-08/lab-08.ipynb` (tab-separated CSVs with header):
 
 ```python
 registerDF = spark.read.load('sampleData/registerSample.csv',
@@ -217,7 +217,7 @@ spark.udf.register("getTimestamp", lambda x: f"{x.strftime('%a')} {x.hour}", "st
 
 Task: binary classification of Amazon reviews as **useful/useless**. Label rule (handout): the helpfulness index is `HelpfulnessNumerator/HelpfulnessDenominator`, computable only for reviews with `HelpfulnessDenominator > 0`; a review is "useful" if the index is above 0.9. Label encoding: `1.0` = useful, `0.0` = useless. First feature set: a single double = **length of `Text`**; later steps add 3–4 more features and finally word-based features from `Text`.
 
-The provided template (`labs/lab-9/lab9-bigdata-template/lab9-template/lab9-template.ipynb`) fixes the **evaluation** part; the student fills preprocessing and pipeline. Imports in the template show the intended toolbox:
+The provided template (`labs/lab-09/lab-09-bigdata-template/lab-09-template/lab9-template.ipynb`) fixes the **evaluation** part; the student fills preprocessing and pipeline. Imports in the template show the intended toolbox:
 
 ```python
 from pyspark.ml import Pipeline

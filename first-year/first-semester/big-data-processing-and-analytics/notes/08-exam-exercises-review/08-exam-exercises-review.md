@@ -8,7 +8,7 @@ status: complete
 ---
 
 > [!summary] **Document Summary**
-> A review of the official exercise book (`exercises/spark/02-spark-exercises-bigdatanb.pdf`, exercises 30–46) with fully worked PySpark solutions for the representative ones: filtering a log (Ex. 30/31), maximum/top-k PM10 values (Ex. 32–34), and multi-input aggregation with `groupByKey`/`cogroup` (Ex. 39/42). Code is taken from the official solution notebooks in `exercises/spark/solutionsexspark30-46/`.
+> A review of the official exercise book (`exercises/spark/02-spark-exercises-bigdatanb.pdf`, exercises 30–46) with fully worked PySpark solutions for the representative ones: filtering a log (Ex. 30/31), maximum/top-k PM10 values (Ex. 32–34), and multi-input aggregation with `groupByKey`/`cogroup` (Ex. 39/42). Code is taken from the official solution notebooks in `exercises/spark/solutions-spark-30-46/`.
 
 ## The Exercise Catalog
 
@@ -21,7 +21,7 @@ Input formats (from the exercise book):
 - **Misleading profiles** (Ex. 44–45): watched movies `userid,movieid,start,end`, preferences `userid,genre`, catalog `movieid,title,genre` → users with > threshold% watched movies outside their liked genres.
 - **Time series** (Ex. 46): `timestamp, temperature` (Unix, 1-minute sampling) → windows of 3 consecutive readings with increasing trend.
 
-Official solutions on disk: `exercises/spark/solutionsexspark30-46/exNN*.ipynb` (often with alternative variants: `ex31-v2-flatmap`, `ex32-takeordered`, `ex34-top`, `ex36-v1/v2/v3`, …). Exercise data: `exercises/spark/exsparkdata30-46/data/exNN/data/`.
+Official solutions on disk: `exercises/spark/solutions-spark-30-46/exNN*.ipynb` (often with alternative variants: `ex31-v2-flatmap`, `ex32-takeordered`, `ex34-top`, `ex36-v1/v2/v3`, …). Exercise data: `exercises/spark/ex-spark-data-30-46/data/exNN/data/`.
 
 ## Worked Exercise 1 — Log Filtering (Ex. 30 + 31)
 
@@ -78,7 +78,7 @@ maxPM10Value = pm10ValuesRDD.reduce(lambda value1, value2: max(value1, value2))
 print(maxPM10Value)
 ```
 
-With `takeOrdered` and an inverted key (`sol_ex32-takeordered.ipynb`): *takeOrdered returns the smallest elements*, so negate the values to obtain the maximum:
+With `takeOrdered` and an inverted key (`sol_ex-32-take-ordered.ipynb`): *takeOrdered returns the smallest elements*, so negate the values to obtain the maximum:
 
 ```python
 maxPM10Value = pm10ValuesRDD.takeOrdered(1, lambda n: -1 * n)[0]
@@ -91,7 +91,7 @@ top3PM10Value = pm10ValuesRDD.top(3)
 print(top3PM10Value)      # e.g. [60.2, 55.5, 52.5]
 ```
 
-**Ex. 34 — the full line(s) achieving the maximum.** Requires two steps: compute the max, then filter the original RDD by that value (`sol_ex34-takeordered.ipynb`):
+**Ex. 34 — the full line(s) achieving the maximum.** Requires two steps: compute the max, then filter the original RDD by that value (`sol_ex-34-take-ordered.ipynb`):
 
 ```python
 maxPM10Value = pm10ValuesRDD.takeOrdered(1, lambda num: -num)[0]
@@ -260,9 +260,9 @@ On the book's sample input the two selected windows are `1451606400,12.1,1451606
 
 ## Where to Practice More
 
-- Alternative official variants: `solutionsexspark30-46/` contains `ex31-v1`, `ex32-top`, `ex33-takeorderd`, `ex34-takeorderedwrong` (a deliberately wrong variant worth studying), `ex36-v1/v2/v3`, `ex39bis-v1`, `ex41-v1/v2`, `ex45` (profile update with the ≥5-movies rule).
+- Alternative official variants: `solutions-spark-30-46/` contains `ex31-v1`, `ex32-top`, `ex33-take-ordered`, `ex34-takeorderedwrong` (a deliberately wrong variant worth studying), `ex36-v1/v2/v3`, `ex39bis-v1`, `ex41-v1/v2`, `ex45` (profile update with the ≥5-movies rule).
 - The exercise statement PDF with input/output examples: `exercises/spark/02-spark-exercises-bigdatanb.pdf`.
-- Bike-sharing variants (Ex. 43): input data under `exercises/spark/exsparkdata30-46/data/ex43/` (`readings.txt`, `neighbors.txt`) with reference outputs in `critical-stations/` and `critical-stations-timeslots/`.
+- Bike-sharing variants (Ex. 43): input data under `exercises/spark/ex-spark-data-30-46/data/ex43/` (`readings.txt`, `neighbors.txt`) with reference outputs in `critical-stations/` and `critical-stations-timeslots/`.
 
 ## Key Takeaways
 

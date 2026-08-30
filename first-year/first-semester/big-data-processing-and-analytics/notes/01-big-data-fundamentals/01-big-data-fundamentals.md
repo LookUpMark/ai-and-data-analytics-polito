@@ -125,7 +125,7 @@ Desired properties: fault-tolerant against both hardware failures and human erro
 
 ## Why Distributed Processing in This Course (labs)
 
-The course is built around one practical fact, repeated in every lab: the input files are too large to process on a single lab PC, so applications are **submitted to the BigData@Polito cluster** and executed in parallel on its nodes (Lab 1, `labs/lab-1/lab1-bigdata-vscode.pdf`).
+The course is built around one practical fact, repeated in every lab: the input files are too large to process on a single lab PC, so applications are **submitted to the BigData@Polito cluster** and executed in parallel on its nodes (Lab 1, `labs/lab-01/lab-01-bigdata-vscode.pdf`).
 
 Consequences that show up throughout the labs:
 

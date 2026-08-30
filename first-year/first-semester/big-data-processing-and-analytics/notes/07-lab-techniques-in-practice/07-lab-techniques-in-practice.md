@@ -117,7 +117,7 @@ orderedByValueRDD = orderedByValueRDD.coalesce(2)
 orderedByValueRDD.saveAsTextFile("output")
 ```
 
-- Inspect results in HUE or read the `part-00000…` files. Lab 6's stored output (`labs/lab-6/output/`) looks like:
+- Inspect results in HUE or read the `part-00000…` files. Lab 6's stored output (`labs/lab-06/output/`) looks like:
 
 ```
 ('B1,B3', 3)
