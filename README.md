@@ -37,7 +37,7 @@ folders (exam material, projects, simulations).
 | Course | Notes | Other material |
 |---|---|---|
 | Architettura dei Sistemi di Elaborazione | 10 topics | labs (ARM assembly, Keil/LPC1768), slides |
-| Big Data Processing and Analytics | 8 topics | labs (Hadoop/Spark), exercises, slides |
+| Big Data Processing and Analytics | 10 topics | labs (Hadoop/Spark), exercises, slides |
 | Computer Network Technologies and Services | 10 topics | slides |
 | Data Science and Database Technology | 10 topics | homework (3), slides |
 | Machine Learning and Pattern Recognition | 10 topics | labs, exam, project, slides |
